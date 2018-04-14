@@ -3,16 +3,17 @@
     <img src="/static/images/mighty_heroes.jpg"/>
     <img src="/static/images/magic-wand-hi.png"/>
     <img src="/static/images/sword.png"/>
+    <img src="/static/images/ninja.jpeg"/>
+    <img src="/static/images/bow.jpeg"/>
     <h1>Create and browse your favorite heroes!</h1>
     <h2>For the mightiest of the mighty.</h2>
     <h2>The most heroic of the heroes.</h2>
     <form v-on:submit.prevent="register">
-      <p>1. Choose a user name (this is how you will be known by others on Red Bird).</p>
-      <input class="narrow" v-model="username" placeholder="User Name">
-      <p>2. Create an account.</p>
-      <input class="wide" v-model="name" placeholder="First and Last Name"><br/>
-      <input class="narrow" v-model="email" placeholder="Email Address">
-      <input class="narrow" type="password" v-model="password" placeholder="Password">
+      <p>Create an account! (Or sign in at the top of the page)</p>
+      <input class="wide" v-model="username" placeholder="User Name"><br/>
+      <input class="wide" v-model="name" placeholder="Name"><br/>
+      <input class="wide" v-model="email" placeholder="Email"><br/>
+      <input class="wide" type="password" v-model="password" placeholder="Password"><br/>
       <button class="alternate" type="submit">Register</button>
     </form>
     <p class="error">{{registerError}}</p>
@@ -63,9 +64,12 @@
      font-size: 1.2em;
      font-weight: normal;
  }
-form {
+ form {
      margin-top: 50px;
-}
+ }
+ button {
+     margin-top: 5px;
+ }
  .column {
      width: 960px;
      height: 600px;
@@ -79,8 +83,12 @@ form {
  }
  .narrow {
      width: 170px;
+     padding: 5px;
+     margin: 5px;
  }
  .wide {
-     width: 370px;
+     width: 380px;
+     padding: 5px;
+     margin: 5px;
  }
 </style>
