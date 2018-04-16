@@ -27,6 +27,8 @@ if (jwtSecret === undefined) {
 }
 
 const verifyToken = (req, res, next) => {
+  console.log('verifying token');
+  console.log(req.headers);
   const token = req.headers['authorization'];
   console.log(token);
   if (!token)

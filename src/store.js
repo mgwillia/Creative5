@@ -5,9 +5,9 @@ import axios from 'axios';
 
 Vue.use(Vuex);
 
-const getAuthHeader = () => {
-  console.log(localStorage.getItem('token'));
-  return { headers: {'Authorization': localStorage.getItem('token')}};
+const getAuthHeader = () => { 
+  let token = localStorage.getItem('token');
+  return { headers: {'authorization': token}};
 }
 
 export default new Vuex.Store({
@@ -147,14 +147,14 @@ export default new Vuex.Store({
       });
     },
     deleteHero(context,hero) {
+      console.log('date',hero.hero.created);
+      console.log('token',getAuthHeader());
       axios.delete("/api/users/" + context.state.user.id + "/delete",hero.hero.created,getAuthHeader()).then(response => { context.dispatch('getUserHeroes');
       }).catch(err => {
         console.log("deleteHero failed:",err);
       });
     },
     initialize(context) {
-      let token = localStorage.getItem('token');
-      console.log(token);
       if(token) {
 	axios.get("/api/me",getAuthHeader()).then(response => {
 	  context.commit('setToken',token);
