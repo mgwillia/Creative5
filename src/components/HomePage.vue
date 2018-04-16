@@ -17,6 +17,7 @@
    components: {WelcomePage,UserFeed},
    computed: {
      loggedIn: function() {
+       console.log(this.$store.getters.loggenIn);
        return this.$store.getters.loggedIn;
      },
    },

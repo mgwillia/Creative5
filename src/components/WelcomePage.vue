@@ -17,6 +17,9 @@
       <button class="alternate" type="submit">Register</button>
     </form>
     <p class="error">{{registerError}}</p>
+    <div class="footer">
+      <a href="https://github.com/mgwillia/Creative5">GitHub</a>
+    </div>
   </div>
 </template>
 
@@ -54,7 +57,10 @@
  img {
      width: 100px;
  }
-
+ a {
+     text-decoration: none;
+     color: black;
+ }
  h1 {
      margin-bottom: 0px;
  }

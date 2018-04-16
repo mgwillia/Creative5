@@ -118,14 +118,19 @@ app.get('/api/users/:id/heroes', (req, res) => {
 
 app.post('/api/users/:id/heroes', verifyToken, (req, res) => {
   let id = parseInt(req.params.id);
-  console.log(id);
-  console.log(req.userID);
   if (id !== req.userID) {
     res.status(403).send();
     return;
   }
+  let name = req.body.heroName.heroName;
+  let desc = req.body.heroName.heroDescription;
+  let hClass = req.body.heroName.heroClass;
+  let sPower = req.body.heroName.specialPower;
+  let attack = req.body.heroName.attackPoints;
+  let defense = req.body.heroName.defensePoints;
+  let magic = req.body.heroName.magicPoints;
   knex('users').where('id',id).first().then(user => {
-    return knex('heroes').insert({user_id: id, heroName:req.body.heroName, heroDescription:req.body.heroDescription, heroClass:req.body.heroClass, specialPower:req.body.specialPower, attackPoints:req.body.attackPoints, defensePoints:req.body.defensePoints, magicPoints:req.body.magicPoints, created: new Date()});
+    return knex('heroes').insert({user_id: id, heroName: name, heroDescription: desc, heroClass: hClass, specialPower: sPower, attackPoints: attack, defensePoints: defense, magicPoints: magic, created: new Date()});
   }).then(ids => {
     return knex('heroes').where('id',ids[0]).first();
   }).then(heroName => {
@@ -177,17 +182,23 @@ app.get('/api/me', verifyToken, (req,res) => {
   });
 });
 
-app.delete('/api/users/:id/delete/:hero', (req,res) => {
+app.delete('/api/users/:id/delete', verifyToken, (req,res) => {
+  console.log('in delete endpoint');
   // id of the person who owns the hero
   let id = parseInt(req.params.id);
   // id of the hero
   let thisHero = parseInt(req.params.hero);
   // make sure both of these users exist
+  console.log(id);
+  console.log(req.body);
+  console.log(req.body.created);
   knex('users').where('id',id).first().then(user => {
-    return knex('heroes').where('id',thisHero).first();
+    console.log('confirming hero');
+    return knex('heroes').where('created',req.body.created).first();
   }).then(user => {
+    console.log('about to delete');
     // delete the entry in the heroes table
-    return knex('heroes').where({'id':thisHero}).first().del();
+    return knex('heroes').where({'heroDescription':req.body.created}).first().del();
   }).then(ids => {
     res.sendStatus(200);
     return;

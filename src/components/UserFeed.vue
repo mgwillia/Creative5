@@ -2,17 +2,25 @@
   <div class="feed">
     <div>
       <form v-on:submit.prevent="createHero" class="heroForm">
-	<textarea v-model="textName" placeholder=""/><br/>
-	<textarea v-model="textDescription" placeholder=""/><br/>
-        <select v-model="heroClassSelect" placeholder="">
-          <option value="ranger">Ranger</option>
-	  <option value="mage">Mage</option>
-  	  <option value="brawler">Brawler</option>
-	  <option value="paladin">Paladin</option>
-	  <option value="cleric">Cleric</option>
-	</select><br/>
+	<h3>Create your hero!</h3>
+	<div class="flexcontainer">
+	  <div>
+	    <textarea v-model="textName" placeholder="Name" class="name"/>
+	  </div>
+	  <div class="selectWrapper">
+	    <select v-model="heroClassSelect" class="hSelect">
+              <option class="gray" value="" disabled selected>Select class</option>
+              <option value="ranger">Ranger</option>
+              <option value="mage">Mage</option>
+              <option value="brawler">Brawler</option>
+              <option value="paladin">Paladin</option>
+              <option value="cleric">Cleric</option>
+            </select>
+ 	  </div>
+	</div>
+	<textarea v-model="textDescription" placeholder="Bio" class="bio"/><br/>
 	<div class="buttonWrap">
-	  <button class="primary" type="submit">Create Hero</button>
+	  <button class="alternate" type="submit">Create Hero</button>
 	</div>
       </form>
     </div>
@@ -102,14 +110,15 @@
  .heroForm {
      background: #eee;
      padding: 10px;
-     margin-bottom: 10px;
+     margin-bottom: 50px;
  }
  .buttonWrap {
      width: 100%;
      display: flex;
  }
  button {
-     margin-left: auto;
+     margin-top: 10px;
+     margin-right: auto;
      height: 2em;
      font-size: 0.9em;
  }
@@ -120,5 +129,27 @@
      margin-bottom: 5px;
      resize: none;
      box-sizing: border-box;
+     font-size: x-large;
+ }
+ .name {
+     height: 2em;
+ }
+ .flexcontainer {
+     display: flex;
+     flex-direction: row;
+ }
+ .hSelect {
+     font-family: "Arial";
+     color: lightblack;
+     font-size: x-large;
+     background-color: white;
+     height: 40px;
+ }
+ .selectWrapper {
+     margin-right: 0px;
+     margin-left: auto;
+ }
+ .gray {
+     color: gray;
  }
 </style>

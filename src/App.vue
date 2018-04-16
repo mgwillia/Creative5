@@ -40,7 +40,7 @@
      background-color: #F35537;
  }
  button.alternate {
-     background-color: #77C4D3;
+     background-color: steelblue;
  }
  button:focus {
      outline: none;

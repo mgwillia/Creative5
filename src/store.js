@@ -24,8 +24,10 @@ export default new Vuex.Store({
     user: state => state.user,
     getToken: state => state.token,
     loggedIn: state => {
-      if (state.token === '') 
+      console.log(state.token);
+      if (state.token === '') {
 	return false;
+      }
       return true;
     },
     loginError: state => state.loginError,
@@ -40,8 +42,7 @@ export default new Vuex.Store({
     },
     setToken (state, token) {
       state.token = token;
-      console.log('Setter:');
-      console.log(state.token);
+      console.log('Setter:',token);
       if (token === '') {
         localStorage.removeItem('token');
       }
@@ -146,9 +147,7 @@ export default new Vuex.Store({
       });
     },
     deleteHero(context,hero) {
-      console.log(context.state.user.id);
-      console.log(hero.id);
-      return axios.delete("/api/users/" + context.state.user.id + "/delete/" + hero.id,getAuthHeader()).then(response => { context.dispatch('getUserHeroes');
+      axios.delete("/api/users/" + context.state.user.id + "/delete",hero.hero.created,getAuthHeader()).then(response => { context.dispatch('getUserHeroes');
       }).catch(err => {
         console.log("deleteHero failed:",err);
       });
